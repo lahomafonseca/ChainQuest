@@ -1,0 +1,18 @@
+pragma solidity ^0.8.20;
+
+contract ChainQuest {
+    struct Quest {
+        string description;
+        bool completed;
+    }
+
+    mapping(address => Quest[]) public playerQuests;
+
+    function addQuest(string calldata desc) external {
+        playerQuests[msg.sender].push(Quest(desc, false));
+    }
+
+    function completeQuest(uint256 id) external {
+        playerQuests[msg.sender][id].completed = true;
+    }
+}
